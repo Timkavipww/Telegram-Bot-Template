@@ -1,0 +1,30 @@
+services:
+  postgres:
+    image: postgis/postgis
+    container_name: postgres
+    env_file:
+      - .env.db
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    networks:
+      - my-network
+
+  bot:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    container_name: mybot
+    restart: unless-stopped
+    env_file:
+      - .env
+    depends_on:
+      - postgres
+    networks:
+      - my-network
+
+networks:
+  my-network:
+
+
+volumes:
+  postgres_data:
