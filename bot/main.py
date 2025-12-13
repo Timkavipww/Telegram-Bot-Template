@@ -6,13 +6,14 @@ from bot.bot import bot, dp
 from app.database.init_db import init_models
 from app.utils.logger import logger
 from bot.handlers import router
-
+from app.settings.config import config
 import asyncio
 
 async def main():
 
     await init_models()
-
+    config.validate_config()
+    
     dp.include_router(router=router)
     dp.update.middleware(DbSessionMiddleware())
     
