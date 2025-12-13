@@ -1,11 +1,11 @@
-from app.middleware.db_session_middleware import DbSessionMiddleware
-from app.middleware.service_middleware import ServiceMiddleware
-from app.middleware.ensure_user_middleware import EnsureUserMiddleware
+from bot.middleware.db_session_middleware import DbSessionMiddleware
+from bot.middleware.service_middleware import ServiceMiddleware
+from bot.middleware.ensure_user_middleware import EnsureUserMiddleware
 
-from app.bot import bot, dp
+from bot.bot import bot, dp
 from app.database.init_db import init_models
 from app.utils.logger import logger
-from app.handlers import router
+from bot.handlers import router
 
 import asyncio
 
@@ -14,8 +14,8 @@ async def main():
     await init_models()
 
     dp.include_router(router=router)
+    dp.update.middleware(DbSessionMiddleware())
     
-    dp.message.middleware(DbSessionMiddleware())
     dp.message.middleware(EnsureUserMiddleware())
     dp.message.middleware(ServiceMiddleware())
 

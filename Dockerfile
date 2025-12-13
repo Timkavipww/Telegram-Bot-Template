@@ -5,6 +5,6 @@ WORKDIR /usr/src/app
 COPY requirements.txt .
 RUN pip install --no-cache-dir --root-user-action=ignore -r requirements.txt
 
-COPY . ./app
+COPY . .
 
-CMD ["python", "-m", "app.main"]
+CMD ["python", "-m", "bot.main"]

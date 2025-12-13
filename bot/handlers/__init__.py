@@ -1,6 +1,6 @@
 from aiogram import Router
 
-from app.handlers.start_handler import router as start_router
+from bot.handlers.start_handler import router as start_router
 
 router = Router()
 

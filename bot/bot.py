@@ -1,4 +1,4 @@
-from app.config import config
+from app.settings.config import config
 
 from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
